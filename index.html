@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Application</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="chat-container">
+        <div id="messages" style="height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 10px;"></div>
+        <input id="receiver-input" type="text" placeholder="Enter receiver's username..." />
+        <input id="message-input" type="text" placeholder="Type a message..." />
+        <button id="send-button">Send</button>
+    </div>
+
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+
+        // Prompt the sender to enter their username (or this could come from your session)
+        const senderId = prompt("Enter your username:");
+
+        document.getElementById('send-button').onclick = () => {
+            const message = document.getElementById('message-input').value;
+            const receiverId = document.getElementById('receiver-input').value;
+
+            // Emit sendMessage with senderId and receiverId
+            socket.emit('sendMessage', { senderId, receiverId, message });
+            
+            // Clear the input after sending
+            document.getElementById('message-input').value = ''; 
+        };
+
+        socket.on('receiveMessage', ({ senderId, message }) => {
+            console.log(`Message received from ${senderId}: ${message}`);
+            const messagesDiv = document.getElementById('messages');
+            messagesDiv.innerHTML += `<div><strong>${senderId}:</strong> ${message}</div>`;
+            
+            // Automatically scroll to the bottom of the messages div
+            messagesDiv.scrollTop = messagesDiv.scrollHeight; 
+        });
+    </script>
+</body>
+</html>

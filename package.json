@@ -1,0 +1,21 @@
+{
+  "name": "chat-application",
+  "version": "1.0.0",
+  "description": "Creating a real-time chat application using Node.js with Socket.IO and HTML/CSS is a great project for your MCA. Below is a detailed guide on how to implement it, including the necessary code snippets and explanations.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "express": "^4.21.1",
+    "express-session": "^1.18.1",
+    "mongoose": "^8.7.1",
+    "mysql": "^2.18.1",
+    "mysql2": "^3.11.3",
+    "socket.io": "^4.8.0"
+  }
+}
